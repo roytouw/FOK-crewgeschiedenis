@@ -8,7 +8,6 @@
 			google.load('visualization', '1', {
 				'packages': ['corechart', 'table', 'timeline']
 			});
-	
 			function drawItems(num) {
 				var jsonPieChartData = $.ajax({
 					url: "getpiechartdata.php",
@@ -24,17 +23,32 @@
 					async: false
 				}).responseText;
 	
-				var jsonTimelineData = $.ajax({
-					url: "gettimelinedata.php",
+				/*var jsonTimelineData = $.ajax({
+					url: "gettimelinedata2.php",
 					data: "q=" + num,
-					dataType: "json",
+					dataType: "JSON",
 					async: false
 				}).responseText;
-	
+				console.log(typeof(jsonTimelineData));*/
+				var jsonTimelineData;
+				$.ajax({
+					url: "gettimelinedata2.php",
+					dataType: "JSON",
+					async: false,
+					data: {
+						user: num
+					},
+					success: function(callback) {
+						jsonTimelineData = callback;
+					}
+				});
 				// Create our data table out of JSON data loaded from server.
 				var piechartdata = new google.visualization.DataTable(jsonPieChartData);
 				var tabledata = new google.visualization.DataTable(jsonTableData);
 				var timelinedata = new google.visualization.DataTable(jsonTimelineData);
+				console.log(piechartdata);
+				console.log(timelinedata);
+
 	
 				// Instantiate and draw our pie chart, passing in some options.
 				var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -64,7 +78,7 @@
 				});
 	
 				// Instantiate Timeline
-				var chart = new google.visualization.Timeline(document.getElementById('timeline_div'));
+				/*var chart = new google.visualization.Timeline(document.getElementById('timeline_div'));
 				chart.draw(timelinedata, {
 					width: 700,
 					chartArea: {
@@ -73,7 +87,17 @@
 						width: "90%",
 						height: "90%"
 					}
-				});
+				});*/
+
+			  var container = document.getElementById('timeline_div');
+			  var chart = new google.visualization.Timeline(container);
+			  var dataTable = new google.visualization.DataTable();
+			  dataTable.addColumn({ type: 'string', id: 'Forum' });
+			  dataTable.addColumn({ type: 'number', id: 'Start' });
+			  dataTable.addColumn({ type: 'number', id: 'End' });
+			  dataTable.addRows(jsonTimelineData);
+			  chart.draw(dataTable);
+
 			}
 		</script>
 	</head>
