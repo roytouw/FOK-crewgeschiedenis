@@ -46,9 +46,6 @@
 				var piechartdata = new google.visualization.DataTable(jsonPieChartData);
 				var tabledata = new google.visualization.DataTable(jsonTableData);
 				var timelinedata = new google.visualization.DataTable(jsonTimelineData);
-				console.log(piechartdata);
-				console.log(timelinedata);
-
 	
 				// Instantiate and draw our pie chart, passing in some options.
 				var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
