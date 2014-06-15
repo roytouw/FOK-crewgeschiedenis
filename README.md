@@ -4,7 +4,7 @@ FOK-crewgeschiedenis
 Geschiedenis van de FOK!.nl-crew. Overzichten per user en forum.
 Zie ook http://fok.zevkiselim.nl/crew/.
 
-- Code gebruikt van sophiedogg.com/creating-a-google-pie-chart-using-sql-data/.
+- Code gebruikt van http://sophiedogg.com/creating-a-google-pie-chart-using-sql-data/.
 - SQL-data te vinden in "database.sql".
 
 
